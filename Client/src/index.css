@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Matrix Theme Colors - HSL Format */
+  --matrix-black: 0 0% 0%;       /* #000000 */
+  --matrix-green: 120 100% 50%;  /* #00FF00 */
+  --matrix-green-dim: 120 100% 25%;
+  
+  /* Mapping to Shadcn/Tailwind variables */
+  --background: var(--matrix-black);
+  --foreground: var(--matrix-green);
+  
+  --card: 0 0% 5%;
+  --card-foreground: var(--matrix-green);
+  
+  --popover: 0 0% 5%;
+  --popover-foreground: var(--matrix-green);
+  
+  --primary: var(--matrix-green);
+  --primary-foreground: var(--matrix-black);
+  
+  --secondary: 120 100% 10%;
+  --secondary-foreground: var(--matrix-green);
+  
+  --muted: 120 50% 10%;
+  --muted-foreground: 120 70% 40%;
+  
+  --accent: 120 100% 15%;
+  --accent-foreground: var(--matrix-green);
+  
+  --destructive: 0 100% 50%;
+  --destructive-foreground: var(--matrix-black);
+  
+  --border: 120 100% 25%;
+  --input: 120 100% 20%;
+  --ring: var(--matrix-green);
+  
+  --font-mono: 'Fira Code', monospace;
+  --font-display: 'Share Tech Mono', monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
+    font-family: var(--font-mono);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-normal tracking-wider uppercase;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-background border-l border-border/30;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 hover:bg-primary/50;
+}
+
+/* Terminal Cursor Effect */
+.cursor-blink::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  @apply text-primary;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* CRT Scanline Effect (Optional but cool) */
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0,0,0,0.2) 50%,
+    rgba(0,0,0,0.2)
+  );
+  background-size: 100% 4px;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.15;
+}
